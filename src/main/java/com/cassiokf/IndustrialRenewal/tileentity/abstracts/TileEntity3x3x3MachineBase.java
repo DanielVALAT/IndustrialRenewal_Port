@@ -60,7 +60,6 @@ public abstract class TileEntity3x3x3MachineBase<TE extends TileEntity3x3x3Machi
 
     public void breakMultiBlocks()
     {
-        //Utils.debug("breaking block", isMaster());
         if (!this.isMaster())
         {
             if (getMaster() != null)
@@ -90,10 +89,20 @@ public abstract class TileEntity3x3x3MachineBase<TE extends TileEntity3x3x3Machi
     {
         if (faceChecked) return Direction.from3DDataValue(faceIndex);
 
-        Direction facing = level.getBlockState(getMaster().worldPosition).getValue(Block3x3x3Base.FACING);
-        faceChecked = true;
-        faceIndex = facing.get3DDataValue();
-        return facing;
+        // Prevent null pointer exception
+        if (level == null) return Direction.NORTH;
+
+        TileEntity3x3x3MachineBase master = getMaster();
+        if (master == null || master.worldPosition == null) return Direction.NORTH;
+
+        if (level.getBlockState(master.worldPosition).getBlock() instanceof Block3x3x3Base)
+        {
+            faceChecked = true;
+            faceIndex = level.getBlockState(master.worldPosition).getValue(Block3x3x3Base.FACING).get3DDataValue();
+            return level.getBlockState(master.worldPosition).getValue(Block3x3x3Base.FACING);
+        }
+
+        return Direction.NORTH;
     }
 
     public boolean isMaster()
