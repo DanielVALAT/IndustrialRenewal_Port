@@ -19,7 +19,7 @@ modId="industrialrenewal" #mandatory
 # The version number of the mod - there's a few well known ${} variables useable here or just hardcode it
 # ${file.jarVersion} will substitute the value of the Implementation-Version as read from the mod's JAR file metadata
 # see the associated build.gradle script for how to populate this completely automatically during a build
-version="${file.jarVersion}-1.1.0" #mandatory
+version="1.2.0" #mandatory
  # A display name for the mod
 displayName="Industrial Renewal" #mandatory
 # A URL to query for updates for this mod. See the JSON update specification https://mcforge.readthedocs.io/en/latest/gettingstarted/autoupdate/
@@ -29,13 +29,13 @@ displayName="Industrial Renewal" #mandatory
 # A file name (in the root of the mod JAR) containing a logo for display
 logoFile="logo.png" #optional
 # A text field displayed in the mod UI
-credits="StarsPath for 1.16.5 port" #optional
+credits="Ported by StarsPath, fixed by danielvalat.fr" #optional
 # A text field displayed in the mod UI
 authors="CassioKF" #optional
 # The description text for the mod (multi line!) (#mandatory)
 description='''
 An industrial style mod that aims to make the aesthetic part of your industry much more real.
-This is a 1.16.5 port. Original 1.12.2 author: CassioKF, Ported to 1.16.5 by: StarsPath
+This is a 1.16.5 port. Original 1.12.2 author: CassioKF, Ported to 1.16.5 by: StarsPath, Fixed by: danielvalat.fr
 '''
 
 [[dependencies.industrialrenewal]]
