@@ -161,22 +161,36 @@ public class TileEntityFluidTank extends TileEntityTowerBase<TileEntityFluidTank
         return Utils.normalizeClamped(sumCurrent, 0, maxCapcity) * 180f;
     }
 
-
     @Nonnull
     @Override
     public <T> LazyOptional<T> getCapability(@Nonnull Capability<T> cap, @Nullable Direction side) {
-        Direction downFace = getMasterFacing().getOpposite();
         TileEntityFluidTank master = getMaster();
 
-        if (side == null)
-            return super.getCapability(cap, side);
+        if (master != null) {
+            Direction masterFacing = getMasterFacing();
 
-        if (cap == CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY)
-        {
-            if (side == downFace && this.worldPosition.equals(master.worldPosition.below().relative(downFace)))
-                return getMaster().tankHandler.cast();
-            if (side == Direction.UP && this.worldPosition.equals(master.worldPosition.above()))
-                return getMaster().tankHandler.cast();
+            if (masterFacing != null) {
+                Direction downFace = masterFacing.getOpposite();
+
+                if (side == null) {
+                    System.out.println("Side is null in getCapability (Located at: " + worldPosition + ")");
+                    return super.getCapability(cap, side);
+                }
+
+                if (cap == CapabilityFluidHandler.FLUID_HANDLER_CAPABILITY) {
+                    if (side == downFace && this.worldPosition != null && this.worldPosition.equals(master.worldPosition.below().relative(downFace))) {
+                        return master.tankHandler.cast();
+                    }
+
+                    if (side == Direction.UP && this.worldPosition != null && this.worldPosition.equals(master.worldPosition.above())) {
+                        return master.tankHandler.cast();
+                    }
+                }
+            } else {
+                System.out.println("MasterFacing is null, cannot continue. (Located at: " + worldPosition + ")");
+            }
+        } else {
+            System.out.println("Master is null, cannot continue. (Located at: " + worldPosition + ")");
         }
 
         return super.getCapability(cap, side);
