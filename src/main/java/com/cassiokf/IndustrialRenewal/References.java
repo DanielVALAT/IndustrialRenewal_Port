@@ -2,8 +2,8 @@ package com.cassiokf.IndustrialRenewal;
 
 public class References {
     public static final String MODID = "industrialrenewal";
-    public static final String NAME = "Industrial Renewal 1.16.5 Ported";
-    public static final String VERSION = "1.0.0";
+    public static final String NAME = "Industrial Renewal 1.16.5 Ported (Fixes by danielvalat.fr)";
+    public static final String VERSION = "1.2.0";
     public static final String NETWORKCHANNEL = "industrialrenewal";
     public static final String GUI_FACTORY = "cassiokf.industrialrenewal.config.IRConfigGuiFactory";
 
